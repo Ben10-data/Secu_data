@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="{{url_for('static', filename='dist/output.css')}}" />
+  <script defer>
+    function toggleSubMenu(id) {
+      const el = document.getElementById(id);
+      el.classList.toggle("hidden");
+      el.classList.toggle("max-h-0");
+      el.classList.toggle("max-h-96");
+    }
+  </script>
+</head>
+<body class="bg-gray-100 text-gray-900 font-sans">
+
+  <!-- Header -->
+  <header class="bg-blue-900 h-14 flex items-center px-6 text-white shadow-lg rounded-t-2xl justify-between">
+    <h1 class="text-xl font-bold tracking-wide">🧠 Mon Dashboard</h1>
+    <a href="{{url_for('index')}}"><h2 class="text-xl font-bold tracking-normal">Home</h2></a>
+  </header>
+
+  <!-- Layout -->
+  <div class="flex h-[calc(100vh-3.5rem)]">
+
+    <!-- Sidebar -->
+    <aside class="bg-gradient-to-tr from-blue-950 to-gray-800 w-64 p-6 text-white shadow-xl space-y-4">
+      <nav class="space-y-4">
+        
+        <!-- Régression Linéaire -->
+        <div>
+          <button onclick="toggleSubMenu('submenu-lineaire')" class="w-full flex justify-between items-center px-4 py-3 bg-blue-800 rounded-lg hover:bg-blue-700 transition-all duration-200 shadow-sm">
+            🔷 Régression Linéaire
+            <span>▼</span>
+          </button>
+          <div id="submenu-lineaire" class="hidden max-h-0 overflow-hidden transition-all duration-300 ease-in-out space-y-2 pl-4 mt-2">
+            <a href="{{ url_for('iris') }}" class="block bg-blue-700 text-white px-3 py-2 rounded hover:bg-blue-600"> Tester Iris</a>
+            <a href="{{url_for('visu_lin')}}" class="block bg-blue-700 text-white px-3 py-2 rounded hover:bg-blue-600">📁 Visualiser les données</a>
+          </div>
+        </div>
+
+        <!-- Régression Logistique -->
+        <div>
+          <button onclick="toggleSubMenu('submenu-logistique')" class="w-full flex justify-between items-center px-4 py-3 bg-blue-800 rounded-lg hover:bg-blue-700 transition-all duration-200 shadow-sm">
+            🔶 Régression Logistique
+            <span>▼</span>
+          </button>
+          <div id="submenu-logistique" class="hidden max-h-0 overflow-hidden transition-all duration-300 ease-in-out space-y-2 pl-4 mt-2">
+            <a href="{{url_for('logistique')}}" class="block bg-blue-700 text-white px-3 py-2 rounded hover:bg-blue-600">❤️ Prédiction cardio</a>
+            <a href="{{url_for('visu_log')}}" class="block bg-blue-700 text-white px-3 py-2 rounded hover:bg-blue-600">📂 Visualiser les données </a>
+          </div>
+        </div>
+
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 bg-gray-50 p-10 overflow-y-auto">
+ 
+        {% block content %}
+
+
+
+        {% endblock %}
+    </main>
+  </div>
+</body>
+</html>

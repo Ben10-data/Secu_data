@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='dist/output.css')}}">
+</head>
+
+       
+    <body class="bg-gradient-to-br from-blue-950 to-gray-300 min-h-screen flex items-center justify-center">
+        <div class="bg-white shadow-2xl rounded-2xl p-10 max-w-lg w-full text-center">
+          <h1 class="text-3xl font-bold text-amber-700 tracking-wider mb-2"><em>Tester le CKKS</em></h2>
+          <h1 class="text-2xl font-bold text-gray-800 mb-4">avec des modèles de régressions :</h1>
+          <h1 class="text-2xl font-medium text-gray-400 mb-4">Linéaire et logistique</h1>
+          <p class="text-gray-600 mb-10">
+            Cette interface permet de simuler des prédictions à l’aide de modèles de régression encryptés avec CKKS et de faire des comparaison avec des predictions sans chiffrement.
+          </p>
+          <div class="flex justify-center gap-4">
+            <a href="{{ url_for('dash_layout') }}">
+                <button class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-xl transition">
+                  Lancer le test 
+                </button>
+              </a>
+            <!-- <button class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-xl"> Test Logistque</button>
+          </div> -->
+        </div>
+  
+</body>
+</html>

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Tester Iris{% endblock %}
+
+{% block content %}
+  <div class="bg-white rounded-xl shadow p-6">
+    <h2 class="text-2xl font-bold mb-4">Formulaire Iris</h2>
+    <form method="POST" class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium mb-1" for="a">Longueur de sépale</label>
+        <input id="a" name="a" type="number" step="any" class="w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500" required/>
+      </div>
+      <button type="submit" class="px-6 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-600 transition">Prédire</button>
+    </form>
+  </div>
+
+  {% if predict_clair is not none %}
+  <section class="result-section mt-6">
+    <h2 class="text-xl font-bold mb-4">Résultats de la Régression Linéaire</h2>
+
+    <div class="comparison-container flex flex-wrap gap-4">
+      <div class="comparison-box flex-1 p-4 bg-blue-200 rounded-lg shadow">
+        <h3 class="text-lg font-semibold">Données en clair</h3>
+        <p><strong>Texte :</strong> {{ texte_clair }}</p>
+        <p><strong>Prédiction :</strong> {{ predict_clair | round(10) }}</p>
+        <p><strong>Performance du modèle :</strong> {{ performance_du_modele_claire | round(10) }}</p>
+        <p><strong>Temps :</strong> {{ temp_pris_clair | round(10) }} s</p>
+      </div>
+
+      <div class="comparison-box flex-1 p-4 bg-orange-200 rounded-lg shadow">
+        <h3 class="text-lg font-semibold">Données chiffrées</h3>
+        <p><strong>Texte :</strong> {{ text_chiffre }}</p>
+        <p><strong>Prédiction déchiffrée :</strong> {{ decrypted_predict_y | round(10) }}</p>
+        <p><strong>Performance du modèle :</strong> {{ performance_du_modele_chiffre | round(10) }}</p>
+        <p><strong>Temps :</strong> {{ temps_chiffre | round(10) }} s</p>
+      </div>
+    </div>
+
+    <div class="error-display mt-4 p-4 rounded-lg shadow bg-gradient-to-r from-blue-300 to-rose-500">
+      <p><strong>Erreur absolue entre les prédictions :</strong> {{ erreur_de_prediction | round(10) }}</p>
+      <p><strong>Différence de performance :</strong> {{ diff_performance | round(10) }}</p>
+    </div>
+
+    <div class="chart-gallery mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div>
+        <h4 class="text-md font-semibold">Erreur de Prédiction</h4>
+        <img src="{{ url_for('static', filename= 'data_linear/'+ errors_img) }}" alt="Erreur" class="w-full rounded-lg">
+      </div>
+      <div>
+        <h4 class="text-md font-semibold">Prédictions sur Données Chiffrées</h4>
+        <img src="{{ url_for('static', filename='data_linear/'+ enc_preds_img) }}" alt="Prédictions Chiffrées" class="w-full rounded-lg">
+      </div>
+      <div>
+        <h4 class="text-md font-semibold">Prédictions sur Données Claires</h4>
+        <img src="{{ url_for('static', filename='data_linear/'+ preds_img) }}" alt="Prédictions Réelles" class="w-full rounded-lg">
+      </div>
+    </div>
+  </section>
+  {% endif %}
+{% endblock %}
